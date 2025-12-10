@@ -8,12 +8,12 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace NSwag.Examples;
 
-internal class ExamplesConverter
+public class ExamplesConverter
 {
     private readonly JsonSerializerSettings? _jsonSerializerSettings;
     private readonly JsonSerializerOptions? _systemTextJsonSettings;
 
-    internal ExamplesConverter(JsonSerializerSettings? jsonSerializerSettings, JsonSerializerOptions? systemTextJsonSettings) {
+    public ExamplesConverter(JsonSerializerSettings? jsonSerializerSettings, JsonSerializerOptions? systemTextJsonSettings) {
         _jsonSerializerSettings = jsonSerializerSettings;
         _systemTextJsonSettings = systemTextJsonSettings;
     }
@@ -23,7 +23,7 @@ internal class ExamplesConverter
         return JToken.Parse(serializeObject);
     }
 
-    internal IDictionary<string, OpenApiExample> ToOpenApiExamplesDictionary(IEnumerable<KeyValuePair<string, Tuple<object, string?>>> examples) {
+    public IDictionary<string, OpenApiExample> ToOpenApiExamplesDictionary(IEnumerable<KeyValuePair<string, Tuple<object, string?>>> examples) {
         return examples.ToDictionary(
             example => example.Key,
             example => new OpenApiExample { Value = SerializeExampleJson(example.Value.Item1), Description = example.Value.Item2 });

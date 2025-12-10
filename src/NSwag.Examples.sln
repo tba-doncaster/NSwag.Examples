@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29728.190
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSwag.Examples", "NSwag.Examples\NSwag.Examples.csproj", "{C347D5E9-4878-49FE-9638-4766018EB786}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSwag.Examples.Core", "NSwag.Examples.Core\NSwag.Examples.Core.csproj", "{C347D5E9-4878-49FE-9638-4766018EB786}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nswag.Examples.AspNetCore", "Nswag.Examples.AspNetCore\Nswag.Examples.AspNetCore.csproj", "{80CFA8B3-2378-4B95-B790-7C3A23127E7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C347D5E9-4878-49FE-9638-4766018EB786}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C347D5E9-4878-49FE-9638-4766018EB786}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C347D5E9-4878-49FE-9638-4766018EB786}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80CFA8B3-2378-4B95-B790-7C3A23127E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80CFA8B3-2378-4B95-B790-7C3A23127E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80CFA8B3-2378-4B95-B790-7C3A23127E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80CFA8B3-2378-4B95-B790-7C3A23127E7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

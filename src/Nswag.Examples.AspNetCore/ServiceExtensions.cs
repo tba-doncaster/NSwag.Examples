@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Nswag.Examples.AspNetCore;
+using NSwag.Examples.Core;
 using NSwag.Generation.AspNetCore;
 
 namespace NSwag.Examples;

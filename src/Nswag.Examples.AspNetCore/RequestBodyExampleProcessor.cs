@@ -5,11 +5,13 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NSwag;
+using NSwag.Examples;
 using NSwag.Generation.AspNetCore;
 using NSwag.Generation.Processors;
 using NSwag.Generation.Processors.Contexts;
 
-namespace NSwag.Examples;
+namespace Nswag.Examples.AspNetCore;
 
 public class RequestBodyExampleProcessor : IOperationProcessor
 {
