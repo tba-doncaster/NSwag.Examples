@@ -30,8 +30,29 @@ public class RequestBodyExampleProcessor : IOperationProcessor
     }
 
     private void SetRequestExamples(OperationProcessorContext context, ExampleProvider exampleProvider) {
-        foreach (var apiParameter in context.OperationDescription.Operation.Parameters.Where(x => x.Kind == OpenApiParameterKind.Body && !x.IsBinaryBodyParameter)) {
+        // Filter body parameters, but safely handle IsBinaryBodyParameter which may throw in Web API
+        var bodyParameters = new List<OpenApiParameter>();
+        foreach (var param in context.OperationDescription.Operation.Parameters.Where(x => x.Kind == OpenApiParameterKind.Body))
+        {
+            try {
+                if (!param.IsBinaryBodyParameter)
+                {
+                    bodyParameters.Add(param);
+                }
+            } catch {
+                // IsBinaryBodyParameter may fail in Web API if ActualConsumesCollection is null
+                // Assume it's not a binary parameter and include it
+                bodyParameters.Add(param);
+            }
+        }
+
+        foreach (var apiParameter in bodyParameters) {
             var parameter = context.Parameters.SingleOrDefault(x => x.Value.Name == apiParameter.Name);
+
+            // Check if RequestBody exists (may be null in Web API)
+            if (context.OperationDescription.Operation.RequestBody == null)
+                continue;
+
             if (!context.OperationDescription.Operation.RequestBody.Content.TryGetValue(MediaTypeName, out var mediaType))
                 continue;
 
