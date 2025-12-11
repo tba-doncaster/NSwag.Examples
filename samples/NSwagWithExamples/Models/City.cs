@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NSwagWithExamples.Models;
+namespace NSwagAspNetCoreWithExamples.Models;
 
 public class City
 {

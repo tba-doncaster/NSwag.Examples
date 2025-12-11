@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NSwag.Examples;
 
-namespace NSwagWithExamples.Models.Examples;
+namespace NSwagAspNetCoreWithExamples.Models.Examples;
 
 [ExampleAnnotation(Name = "Brno")]
 public class BrnoExample : IExampleProvider<City>

@@ -1,6 +1,6 @@
 ﻿using NSwag.Examples;
 
-namespace NSwagWithExamples.Models.Zoo.Examples;
+namespace NSwagAspNetCoreWithExamples.Models.Zoo.Examples;
 
 [ExampleAnnotation(Name = "Sloth")]
 public class SlothExample : IExampleProvider<Animal>

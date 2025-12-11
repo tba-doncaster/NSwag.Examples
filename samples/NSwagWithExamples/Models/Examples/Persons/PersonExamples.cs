@@ -2,7 +2,7 @@
 using NSwag.Examples;
 using RandomNameGeneratorLibrary;
 
-namespace NSwagWithExamples.Models.Examples.Persons;
+namespace NSwagAspNetCoreWithExamples.Models.Examples.Persons;
 
 public class PersonExample : IExampleProvider<Person>
 {

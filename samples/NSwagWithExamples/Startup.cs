@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NSwag.Examples;
-using NSwagWithExamples.Models.Examples;
+using NSwag.Examples.AspNetCore;
+using NSwagAspNetCoreWithExamples.Models.Examples;
 using RandomNameGeneratorLibrary;
 
-namespace NSwagWithExamples;
+namespace NSwagAspNetCoreWithExamples;
 
 public class Startup
 {

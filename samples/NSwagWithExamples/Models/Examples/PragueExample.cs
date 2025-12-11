@@ -2,7 +2,7 @@
 using System.Linq;
 using NSwag.Examples;
 
-namespace NSwagWithExamples.Models.Examples;
+namespace NSwagAspNetCoreWithExamples.Models.Examples;
 
 [ExampleAnnotation(Name = "Praha")]
 public class PragueExample : IExampleProvider<City>

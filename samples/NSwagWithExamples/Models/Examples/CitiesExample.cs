@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using NSwag.Examples;
 
-namespace NSwagWithExamples.Models.Examples;
+namespace NSwagAspNetCoreWithExamples.Models.Examples;
 
 public class CitiesExample : IExampleProvider<List<City>>
 {

@@ -1,4 +1,4 @@
-﻿namespace NSwagWithExamples.Models.Zoo;
+﻿namespace NSwagAspNetCoreWithExamples.Models.Zoo;
 
 public abstract class Animal
 {

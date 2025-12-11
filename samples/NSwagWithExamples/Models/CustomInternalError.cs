@@ -1,4 +1,4 @@
-﻿namespace NSwagWithExamples.Models;
+﻿namespace NSwagAspNetCoreWithExamples.Models;
 
 public class CustomInternalError
 {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NSwagWithExamples.Models;
+using NSwagAspNetCoreWithExamples.Models;
 
-namespace NSwagWithExamples.Controllers;
+namespace NSwagAspNetCoreWithExamples.Controllers;
 
 [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(CustomInternalError))]
 [ApiController]

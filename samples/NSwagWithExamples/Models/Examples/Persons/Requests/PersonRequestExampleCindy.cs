@@ -1,7 +1,7 @@
 using System;
 using NSwag.Examples;
 
-namespace NSwagWithExamples.Models.Examples.Persons.Requests;
+namespace NSwagAspNetCoreWithExamples.Models.Examples.Persons.Requests;
 
 [ExampleAnnotation(Name = "Cindy", ExampleType = ExampleType.Request)]
 public class PersonRequestExampleCindy : IExampleProvider<Person>

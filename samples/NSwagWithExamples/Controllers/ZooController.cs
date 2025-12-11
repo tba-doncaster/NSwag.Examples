@@ -3,10 +3,10 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using NSwagWithExamples.Models;
-using NSwagWithExamples.Models.Zoo;
+using NSwagAspNetCoreWithExamples.Models;
+using NSwagAspNetCoreWithExamples.Models.Zoo;
 
-namespace NSwagWithExamples.Controllers;
+namespace NSwagAspNetCoreWithExamples.Controllers;
 
 [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(CustomInternalError))]
 [ApiController]

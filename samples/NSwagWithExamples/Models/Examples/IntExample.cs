@@ -1,6 +1,6 @@
 using NSwag.Examples;
 
-namespace NSwagWithExamples.Models.Examples;
+namespace NSwagAspNetCoreWithExamples.Models.Examples;
 
 public class IntExample : IExampleProvider<int>
 {

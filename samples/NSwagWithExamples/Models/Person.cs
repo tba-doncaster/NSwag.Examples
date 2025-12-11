@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NSwagWithExamples.Models;
+namespace NSwagAspNetCoreWithExamples.Models;
 
 public class Person
 {

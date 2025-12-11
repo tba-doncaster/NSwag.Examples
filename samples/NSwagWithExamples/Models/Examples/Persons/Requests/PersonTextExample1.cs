@@ -1,6 +1,6 @@
 using NSwag.Examples;
 
-namespace NSwagWithExamples.Models.Examples.Persons.Requests;
+namespace NSwagAspNetCoreWithExamples.Models.Examples.Persons.Requests;
 
 [ExampleAnnotation(Name = "Search text 'inspektor'", ExampleType = ExampleType.Request)]
 public class PersonTextExample1 : IExampleProvider<string>

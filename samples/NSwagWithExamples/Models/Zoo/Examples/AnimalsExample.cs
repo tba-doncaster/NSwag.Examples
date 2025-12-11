@@ -2,7 +2,7 @@
 using System.Linq;
 using NSwag.Examples;
 
-namespace NSwagWithExamples.Models.Zoo.Examples;
+namespace NSwagAspNetCoreWithExamples.Models.Zoo.Examples;
 
 public class AnimalsExample : IExampleProvider<IEnumerable<Animal>>
 {

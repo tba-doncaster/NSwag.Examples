@@ -1,7 +1,7 @@
 ﻿using System;
 using NSwag.Examples;
 
-namespace NSwagWithExamples.Models.Zoo.Examples;
+namespace NSwagAspNetCoreWithExamples.Models.Zoo.Examples;
 
 [ExampleAnnotation(Name = "Monkey")]
 public class MonkeyExample : IExampleProvider<Animal>
