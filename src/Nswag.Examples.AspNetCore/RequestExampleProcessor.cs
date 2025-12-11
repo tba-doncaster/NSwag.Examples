@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using NSwag;
+using NSwag.Examples.Core;
 using NSwag.Generation.AspNetCore;
 using NSwag.Generation.Processors;
 using NSwag.Generation.Processors.Contexts;
 
-namespace NSwag.Examples;
+namespace Nswag.Examples.AspNetCore;
 
 public class RequestExampleProcessor : IOperationProcessor
 {

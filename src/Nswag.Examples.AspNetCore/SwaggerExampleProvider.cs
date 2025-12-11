@@ -5,7 +5,7 @@ using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using NSwag.Examples.Core;
 
-namespace NSwag.Examples;
+namespace Nswag.Examples.AspNetCore;
 
 internal class SwaggerExampleProvider
 {

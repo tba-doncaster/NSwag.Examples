@@ -5,11 +5,6 @@
         <Version>1.0.14</Version>
         <Authors>Vaclav Novotny</Authors>
         <RepositoryUrl>https://github.com/vaclavnovotny/NSwag.Examples</RepositoryUrl>
-        <PackageProjectUrl>https://github.com/vaclavnovotny/NSwag.Examples</PackageProjectUrl>
-        <PackageTabs>NSwag;Examples;Swagger;OpenAPI</PackageTabs>
-        <PackageId>NSwag.Examples</PackageId>
-        <PackageDescription>Define strongly-typed examples for your NSwag based API.</PackageDescription>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <IsPackable>true</IsPackable>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>

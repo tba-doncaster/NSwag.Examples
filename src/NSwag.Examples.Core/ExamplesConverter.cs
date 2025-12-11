@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace NSwag.Examples;
+namespace NSwag.Examples.Core;
 
 public class ExamplesConverter
 {

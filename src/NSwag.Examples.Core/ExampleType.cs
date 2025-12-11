@@ -1,4 +1,4 @@
-namespace NSwag.Examples;
+namespace NSwag.Examples.Core;
 
 public enum ExampleType
 {
