@@ -2,33 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
 using NSwag;
-using NSwag.Examples.Core;
-using NSwag.Generation.AspNetCore;
+using NSwag.Examples.Core.Annotations;
 using NSwag.Generation.Processors;
 using NSwag.Generation.Processors.Contexts;
 
-namespace Nswag.Examples.AspNetCore;
+namespace NSwag.Examples.Core.Generation;
 
 public class RequestExampleProcessor : IOperationProcessor
 {
-    private readonly IServiceProvider _serviceProvider;
+    private readonly ExampleProvider _exampleProvider;
     private readonly ExamplesConverter _examplesConverter;
 
-    public RequestExampleProcessor(IServiceProvider serviceProvider) {
-        _serviceProvider = serviceProvider;
-        _examplesConverter = new ExamplesConverter(AspNetCoreOpenApiDocumentGenerator.GetJsonSerializerSettings(_serviceProvider), AspNetCoreOpenApiDocumentGenerator.GetSystemTextJsonSettings(_serviceProvider));
+    public RequestExampleProcessor(ExampleProvider exampleProvider, ExamplesConverter examplesConverter) {
+        _exampleProvider = exampleProvider;
+        _examplesConverter = examplesConverter;
     }
 
     public bool Process(OperationProcessorContext context) {
-        var exampleProvider = _serviceProvider.GetRequiredService<SwaggerExampleProvider>();
-        SetRequestExamples(context, exampleProvider);
+        SetRequestExamples(context, _exampleProvider);
 
         return true;
     }
 
-    private void SetRequestExamples(OperationProcessorContext context, SwaggerExampleProvider exampleProvider) {
+    private void SetRequestExamples(OperationProcessorContext context, ExampleProvider exampleProvider) {
         var endpointSpecificExampleAttributes = context.MethodInfo.GetCustomAttributes<EndpointSpecificExampleAttribute>().ToList();
         foreach (var apiParameter in context.OperationDescription.Operation.Parameters.Where(x => x.Kind != OpenApiParameterKind.Body)) {
             var exampleTypes = endpointSpecificExampleAttributes
@@ -73,7 +70,7 @@ public class RequestExampleProcessor : IOperationProcessor
         }
     }
 
-    private IDictionary<string, OpenApiExample> GetExamples(SwaggerExampleProvider exampleProvider, Type? valueType, IEnumerable<Type> exampleTypes, ExampleType exampleType) {
+    private IDictionary<string, OpenApiExample> GetExamples(ExampleProvider exampleProvider, Type? valueType, IEnumerable<Type> exampleTypes, ExampleType exampleType) {
         var providerValues = exampleProvider.GetProviderValues(valueType, exampleTypes, exampleType);
         var openApiExamples = _examplesConverter.ToOpenApiExamplesDictionary(providerValues.Select((x, i) => new KeyValuePair<string, Tuple<object, string?>>(x.Key ?? $"Example {i + 1}", x.Value)));
         return openApiExamples;

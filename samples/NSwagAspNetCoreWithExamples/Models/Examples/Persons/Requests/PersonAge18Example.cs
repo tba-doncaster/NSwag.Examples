@@ -1,4 +1,5 @@
 using NSwag.Examples.Core;
+using NSwag.Examples.Core.Annotations;
 
 namespace NSwagAspNetCoreWithExamples.Models.Examples.Persons.Requests;
 

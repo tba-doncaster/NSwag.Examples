@@ -2,40 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using NSwag;
-using NSwag.Examples;
-using NSwag.Examples.Core;
-using NSwag.Generation.AspNetCore;
+using NSwag.Examples.Core.Annotations;
 using NSwag.Generation.Processors;
 using NSwag.Generation.Processors.Contexts;
 
-namespace Nswag.Examples.AspNetCore;
+namespace NSwag.Examples.Core.Generation;
 
 public class RequestBodyExampleProcessor : IOperationProcessor
 {
     private const string MediaTypeName = "application/json";
-    private readonly ILogger<RequestBodyExampleProcessor> _logger;
-    private readonly IServiceProvider _serviceProvider;
+    private readonly IExampleLogger? _logger;
+    private readonly ExampleProvider _exampleProvider;
     private readonly ExamplesConverter _examplesConverter;
 
-    public RequestBodyExampleProcessor(IServiceProvider serviceProvider) {
-        _serviceProvider = serviceProvider;
-        _logger = _serviceProvider.GetRequiredService<ILogger<RequestBodyExampleProcessor>>();
-        _examplesConverter = new ExamplesConverter(AspNetCoreOpenApiDocumentGenerator.GetJsonSerializerSettings(_serviceProvider), AspNetCoreOpenApiDocumentGenerator.GetSystemTextJsonSettings(_serviceProvider));
+    public RequestBodyExampleProcessor(ExampleProvider exampleProvider, ExamplesConverter examplesConverter, IExampleLogger? logger = null) {
+        _exampleProvider = exampleProvider;
+        _examplesConverter = examplesConverter;
+        _logger = logger ?? NullExampleLogger.Instance;
     }
 
     public bool Process(OperationProcessorContext context) {
-        var exampleProvider = _serviceProvider.GetRequiredService<SwaggerExampleProvider>();
-        SetRequestExamples(context, exampleProvider);
-        SetResponseExamples(context, exampleProvider);
+        SetRequestExamples(context, _exampleProvider);
+        SetResponseExamples(context, _exampleProvider);
 
         return true;
     }
 
-    private void SetRequestExamples(OperationProcessorContext context, SwaggerExampleProvider exampleProvider) {
+    private void SetRequestExamples(OperationProcessorContext context, ExampleProvider exampleProvider) {
         foreach (var apiParameter in context.OperationDescription.Operation.Parameters.Where(x => x.Kind == OpenApiParameterKind.Body && !x.IsBinaryBodyParameter)) {
             var parameter = context.Parameters.SingleOrDefault(x => x.Value.Name == apiParameter.Name);
             if (!context.OperationDescription.Operation.RequestBody.Content.TryGetValue(MediaTypeName, out var mediaType))
@@ -55,7 +49,7 @@ public class RequestBodyExampleProcessor : IOperationProcessor
         }
     }
 
-    private void SetResponseExamples(OperationProcessorContext context, SwaggerExampleProvider exampleProvider) {
+    private void SetResponseExamples(OperationProcessorContext context, ExampleProvider exampleProvider) {
         foreach (var response in context.OperationDescription.Operation.Responses) {
             if (!int.TryParse(response.Key, out var responseStatusCode))
                 continue;
@@ -63,14 +57,14 @@ public class RequestBodyExampleProcessor : IOperationProcessor
             if (!response.Value.Content.TryGetValue(MediaTypeName, out var mediaType))
                 continue;
 
-            var attributesWithSameKey = GetAttributesWithSameStatusCode(context.MethodInfo, responseStatusCode);
+            var attributesWithSameKey = ResponseTypeAttributeHelper.GetAttributesWithSameStatusCode(context.MethodInfo, responseStatusCode);
 
             //get attributes from controller, in case when no attribute on action was found
             if (!attributesWithSameKey.Any())
-                attributesWithSameKey = GetAttributesWithSameStatusCode(context.MethodInfo.DeclaringType, responseStatusCode);
+                attributesWithSameKey = ResponseTypeAttributeHelper.GetAttributesWithSameStatusCode(context.MethodInfo.DeclaringType, responseStatusCode);
 
             if (attributesWithSameKey.Count > 1)
-                _logger.LogWarning($"Multiple {nameof(ProducesResponseTypeAttribute)} defined for method {context.MethodInfo.Name}, selecting first.");
+                _logger.LogWarning($"Multiple response type attributes defined for method {context.MethodInfo.Name}, selecting first.");
             else if (attributesWithSameKey.Count == 0)
                 continue;
 
@@ -98,16 +92,10 @@ public class RequestBodyExampleProcessor : IOperationProcessor
         }
     }
 
-    private IDictionary<string, OpenApiExample> GetExamples(SwaggerExampleProvider exampleProvider, Type? valueType, IEnumerable<Type> exampleTypes, ExampleType exampleType) {
+    private IDictionary<string, OpenApiExample> GetExamples(ExampleProvider exampleProvider, Type? valueType, IEnumerable<Type> exampleTypes, ExampleType exampleType) {
         var providerValues = exampleProvider.GetProviderValues(valueType, exampleTypes, exampleType);
         var openApiExamples = _examplesConverter.ToOpenApiExamplesDictionary(providerValues.Select((x, i) => new KeyValuePair<string, Tuple<object, string?>>(x.Key ?? $"Example {i + 1}", x.Value)));
         return openApiExamples;
     }
 
-    private static List<ProducesResponseTypeAttribute> GetAttributesWithSameStatusCode(MemberInfo memberInfo, int responseStatusCode) {
-        return memberInfo
-            .GetCustomAttributes<ProducesResponseTypeAttribute>(true)
-            .Where(x => x.StatusCode == responseStatusCode)
-            .ToList();
-    }
 }

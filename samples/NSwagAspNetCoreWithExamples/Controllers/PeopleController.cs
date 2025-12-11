@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Examples.Core;
+using NSwag.Examples.Core.Annotations;
 using NSwagAspNetCoreWithExamples.Models;
 using NSwagAspNetCoreWithExamples.Models.Examples.Persons.Requests;
 

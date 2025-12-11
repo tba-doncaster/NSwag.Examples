@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
-	<Version>1.0.14</Version>
-	<Authors>Vaclav Novotny</Authors>
+	<Version>2.0.0</Version>
+	<Authors>Vaclav Novotny; TBA Doncaster Limited</Authors>
 	<RepositoryUrl>https://github.com/vaclavnovotny/NSwag.Examples</RepositoryUrl>
 	<PackageProjectUrl>https://github.com/vaclavnovotny/NSwag.Examples</PackageProjectUrl>
-	<PackageTabs>NSwag;Examples;Swagger;OpenAPI</PackageTabs>
-	<PackageId>NSwag.Examples</PackageId>
-	<PackageDescription>Define strongly-typed examples for your NSwag based API.</PackageDescription>
+	<PackageTabs>NSwag;Examples;Swagger;OpenAPI;AspNetCore;</PackageTabs>
+	<PackageId>NSwag.Examples.AspNetCore</PackageId>
+	<PackageDescription>Define strongly-typed examples for your NSwag based AspNetCore API.</PackageDescription>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<IsPackable>true</IsPackable>
 	<LangVersion>latest</LangVersion>

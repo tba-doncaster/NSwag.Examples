@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NSwag.Examples.Core;
+namespace NSwag.Examples.Core.Annotations;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
 public class ExampleAnnotationAttribute : Attribute

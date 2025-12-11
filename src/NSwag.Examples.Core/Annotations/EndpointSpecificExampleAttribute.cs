@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NSwag.Examples.Core;
+namespace NSwag.Examples.Core.Annotations;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
 public class EndpointSpecificExampleAttribute : Attribute

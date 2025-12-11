@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NSwag.Examples.Core;
+using NSwag.Examples.Core.Generation;
 using NSwag.Generation.AspNetCore;
 
 namespace Nswag.Examples.AspNetCore;
@@ -10,8 +12,23 @@ namespace Nswag.Examples.AspNetCore;
 public static class ServiceExtensions
 {
     public static void AddExamples(this AspNetCoreOpenApiDocumentGeneratorSettings settings, IServiceProvider serviceProvider) {
-        settings.OperationProcessors.Add(new RequestBodyExampleProcessor(serviceProvider));
-        settings.OperationProcessors.Add(new RequestExampleProcessor(serviceProvider));
+        // Get dependencies from DI
+        var typeMapper = serviceProvider.GetRequiredService<SwaggerExampleTypeMapper>();
+        var logger = serviceProvider.GetRequiredService<ILogger<RequestBodyExampleProcessor>>();
+
+        // Create adapters for DI-based services
+        var exampleLogger = new MicrosoftExampleLogger(logger);
+        var registry = new DiExampleRegistry(typeMapper, serviceProvider);
+        var exampleProvider = new ExampleProvider(typeMapper, registry);
+
+        // Create ExamplesConverter with ASP.NET Core JSON settings
+        var examplesConverter = new ExamplesConverter(
+            AspNetCoreOpenApiDocumentGenerator.GetJsonSerializerSettings(serviceProvider),
+            AspNetCoreOpenApiDocumentGenerator.GetSystemTextJsonSettings(serviceProvider));
+
+        // Register the Core processors with the logger abstraction
+        settings.OperationProcessors.Add(new RequestBodyExampleProcessor(exampleProvider, examplesConverter, exampleLogger));
+        settings.OperationProcessors.Add(new RequestExampleProcessor(exampleProvider, examplesConverter));
     }
 
     public static void AddExampleProviders(this IServiceCollection collection, params Assembly[] assemblies) {
@@ -32,6 +49,5 @@ public static class ServiceExtensions
         }
 
         collection.AddSingleton(typeMapper);
-        collection.AddSingleton<SwaggerExampleProvider>(provider => new SwaggerExampleProvider(provider.GetRequiredService<SwaggerExampleTypeMapper>(), provider));
     }
 }

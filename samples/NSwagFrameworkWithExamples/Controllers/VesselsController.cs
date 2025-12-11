@@ -13,7 +13,7 @@ namespace NSwagFrameworkWithExamples.Controllers
     {
         [HttpGet]
         [Route]
-        public async Task<IHttpActionResult> GetVessels()
+        public IHttpActionResult GetVessels()
         {
             return Ok(new List<Vessel>
             {

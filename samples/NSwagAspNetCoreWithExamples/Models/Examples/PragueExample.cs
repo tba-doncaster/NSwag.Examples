@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NSwag.Examples.Core;
+using NSwag.Examples.Core.Annotations;
 
 namespace NSwagAspNetCoreWithExamples.Models.Examples;
 
