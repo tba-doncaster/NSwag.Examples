@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using NSwag.Examples;
-using NSwagWithExamples.Models;
-using NSwagWithExamples.Models.Examples;
-using NSwagWithExamples.Models.Examples.Persons.Requests;
+using NSwag.Examples.Core;
+using NSwagAspNetCoreWithExamples.Models;
+using NSwagAspNetCoreWithExamples.Models.Examples.Persons.Requests;
 
-namespace NSwagWithExamples.Controllers;
+namespace NSwagAspNetCoreWithExamples.Controllers;
 
 [ApiController]
 [Route("api/v1/people")]

@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NSwag.Examples\NSwag.Examples.csproj" />
+    <ProjectReference Include="..\..\src\Nswag.Examples.AspNetCore\Nswag.Examples.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\NSwag.Examples.Core\NSwag.Examples.Core.csproj" />
   </ItemGroup>
 
 </Project>

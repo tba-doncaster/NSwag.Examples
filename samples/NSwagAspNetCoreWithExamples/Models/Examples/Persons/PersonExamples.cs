@@ -1,5 +1,5 @@
 ﻿using System;
-using NSwag.Examples;
+using NSwag.Examples.Core;
 using RandomNameGeneratorLibrary;
 
 namespace NSwagAspNetCoreWithExamples.Models.Examples.Persons;

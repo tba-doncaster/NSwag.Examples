@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NSwag.Examples.AspNetCore;
+using Nswag.Examples.AspNetCore;
 using NSwagAspNetCoreWithExamples.Models.Examples;
 using RandomNameGeneratorLibrary;
 

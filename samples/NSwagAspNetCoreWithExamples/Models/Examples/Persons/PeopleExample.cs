@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using NSwag.Examples;
+using NSwag.Examples.Core;
 
 namespace NSwagAspNetCoreWithExamples.Models.Examples.Persons;
 

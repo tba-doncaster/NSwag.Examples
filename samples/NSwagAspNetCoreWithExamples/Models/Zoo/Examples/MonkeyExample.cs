@@ -1,5 +1,4 @@
-﻿using System;
-using NSwag.Examples;
+﻿using NSwag.Examples.Core;
 
 namespace NSwagAspNetCoreWithExamples.Models.Zoo.Examples;
 
