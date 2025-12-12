@@ -39,7 +39,7 @@ We're grateful to Václav Novotný for the original work. This fork maintains th
 ## Install package
 
 ```csharp
-Install-Package NSwag.Examples
+Install-Package TBA.NSwag.Examples
 ```
 
 ## Setup Startup.cs
