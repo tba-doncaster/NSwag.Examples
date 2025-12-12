@@ -7,27 +7,19 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   solution: 'src/NSwag.Examples.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-
 steps:
-- task: UseDotNet@2
-  displayName: 'Install .NET Core SDK'
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
   inputs:
-    version: 9.x
-    performMultiLevelLookup: true
-    includePreviewVersions: true
-
-- task: NuGetAuthenticate@1
-  displayName: 'NuGet Authenticate'
-
-- script: |
-      dotnet restore $(solution)
+    restoreSolution: '$(solution)'
 
 - task: VSBuild@1
   inputs:
