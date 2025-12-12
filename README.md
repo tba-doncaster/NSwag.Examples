@@ -1,6 +1,23 @@
-![Build and Publish](https://github.com/vaclavnovotny/NSwag.Examples/workflows/Build%20and%20Publish/badge.svg) ![Nuget](https://img.shields.io/nuget/v/NSwag.Examples?color=blue)
 # Response and Request Examples for NSwag<!-- omit from toc -->
-This library allows you to programmatically define swagger examples in your NSWag application. Example discovery occurs at start of application and uses reflection. 
+This library allows you to programmatically define swagger examples in your NSwag application. Example discovery occurs at start of application and uses reflection.
+
+## About This Fork
+
+This is a fork of [vaclavnovotny/NSwag.Examples](https://github.com/vaclavnovotny/NSwag.Examples) maintained by TBA Doncaster Limited. We created this fork to:
+
+- **Add .NET Framework Web API support** - The original library only supported ASP.NET Core. We've refactored to support both ASP.NET Core and .NET Framework Web API projects.
+- **Remove dependency injection requirements** - Created `ReflectionExampleRegistry` for non-DI scenarios alongside the existing DI-based approach.
+- **Update NSwag dependencies** - Updated to current NSwag versions for compatibility with modern projects.
+- **Ongoing maintenance** - The original repository has limited activity, and we needed active maintenance for our production projects.
+
+We're grateful to Václav Novotný for the original work. This fork maintains the same MIT license and all original attribution. We opted to maintain a separate fork rather than contribute back due to the scope of changes and the need for immediate availability in our projects.
+
+### Package Structure
+
+- **NSwag.Examples.Core** - Core functionality with no framework dependencies
+- **NSwag.Examples.AspNetCore** - ASP.NET Core integration with DI support
+- **NSwag.Examples.WebApi** - .NET Framework Web API support (coming soon)
+- **NSwag.Examples** - Metapackage for backwards compatibility with the original package 
 
 ### Overview:<!-- omit from toc -->
 - [Setup](#setup)
