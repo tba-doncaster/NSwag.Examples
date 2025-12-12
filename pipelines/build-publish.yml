@@ -32,7 +32,9 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet pack'
   inputs:
-    command: pack
+    command: pack 
+    packagesToPack: 'src/**/*.csproj'
+    configuration: 'Release'
     
 - task: NuGetCommand@2
   displayName: 'NuGet push'
