@@ -22,9 +22,13 @@ public static class ServiceExtensions
         var exampleProvider = new ExampleProvider(typeMapper, registry);
 
         // Create ExamplesConverter with ASP.NET Core JSON settings
-        var examplesConverter = new ExamplesConverter(
-            AspNetCoreOpenApiDocumentGenerator.GetJsonSerializerSettings(serviceProvider),
-            AspNetCoreOpenApiDocumentGenerator.GetSystemTextJsonSettings(serviceProvider));
+        // Try System.Text.Json first, fall back to Newtonsoft.Json
+        var systemTextJsonSettings = AspNetCoreOpenApiDocumentGenerator.GetSystemTextJsonSettings(serviceProvider);
+        var newtonsoftSettings = AspNetCoreOpenApiDocumentGenerator.GetJsonSerializerSettings(serviceProvider);
+
+        IExamplesConverter examplesConverter = systemTextJsonSettings != null
+            ? new SystemTextJsonExamplesConverter(systemTextJsonSettings)
+            : new NewtonsoftExamplesConverter(newtonsoftSettings);
 
         // Register the Core processors with the logger abstraction
         settings.OperationProcessors.Add(new RequestBodyExampleProcessor(exampleProvider, examplesConverter, exampleLogger));

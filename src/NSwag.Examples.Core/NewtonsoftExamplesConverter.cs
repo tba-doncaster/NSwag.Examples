@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace NSwag.Examples.Core;
 
-public class ExamplesConverter
+/// <summary>
+/// Converts examples to OpenAPI format using Newtonsoft.Json
+/// </summary>
+public class NewtonsoftExamplesConverter : IExamplesConverter
 {
     private readonly JsonSerializerSettings? _jsonSerializerSettings;
-    private readonly JsonSerializerOptions? _systemTextJsonSettings;
 
-    public ExamplesConverter(JsonSerializerSettings? jsonSerializerSettings, JsonSerializerOptions? systemTextJsonSettings) {
+    public NewtonsoftExamplesConverter(JsonSerializerSettings? jsonSerializerSettings = null) {
         _jsonSerializerSettings = jsonSerializerSettings;
-        _systemTextJsonSettings = systemTextJsonSettings;
     }
 
     private object SerializeExampleJson(object value) {
-        var serializeObject = _jsonSerializerSettings is not null ? JsonConvert.SerializeObject(value, _jsonSerializerSettings) : JsonSerializer.Serialize(value, _systemTextJsonSettings);
+        var serializeObject = JsonConvert.SerializeObject(value, _jsonSerializerSettings);
         return JToken.Parse(serializeObject);
     }
 
