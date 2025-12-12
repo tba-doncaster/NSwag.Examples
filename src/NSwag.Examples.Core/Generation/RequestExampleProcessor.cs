@@ -12,9 +12,9 @@ namespace NSwag.Examples.Core.Generation;
 public class RequestExampleProcessor : IOperationProcessor
 {
     private readonly ExampleProvider _exampleProvider;
-    private readonly ExamplesConverter _examplesConverter;
+    private readonly IExamplesConverter _examplesConverter;
 
-    public RequestExampleProcessor(ExampleProvider exampleProvider, ExamplesConverter examplesConverter) {
+    public RequestExampleProcessor(ExampleProvider exampleProvider, IExamplesConverter examplesConverter) {
         _exampleProvider = exampleProvider;
         _examplesConverter = examplesConverter;
     }

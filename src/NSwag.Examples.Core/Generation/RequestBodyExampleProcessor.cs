@@ -14,9 +14,9 @@ public class RequestBodyExampleProcessor : IOperationProcessor
     private const string MediaTypeName = "application/json";
     private readonly IExampleLogger? _logger;
     private readonly ExampleProvider _exampleProvider;
-    private readonly ExamplesConverter _examplesConverter;
+    private readonly IExamplesConverter _examplesConverter;
 
-    public RequestBodyExampleProcessor(ExampleProvider exampleProvider, ExamplesConverter examplesConverter, IExampleLogger? logger = null) {
+    public RequestBodyExampleProcessor(ExampleProvider exampleProvider, IExamplesConverter examplesConverter, IExampleLogger? logger = null) {
         _exampleProvider = exampleProvider;
         _examplesConverter = examplesConverter;
         _logger = logger ?? NullExampleLogger.Instance;
