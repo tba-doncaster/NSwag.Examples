@@ -14,12 +14,20 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-steps:
-- task: NuGetToolInstaller@1
 
-- task: NuGetCommand@2
+steps:
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK'
   inputs:
-    restoreSolution: '$(solution)'
+    version: 9.x
+    performMultiLevelLookup: true
+    includePreviewVersions: true
+
+- task: NuGetAuthenticate@1
+  displayName: 'NuGet Authenticate'
+
+- script: |
+      dotnet restore $(solution)
 
 - task: VSBuild@1
   inputs:
