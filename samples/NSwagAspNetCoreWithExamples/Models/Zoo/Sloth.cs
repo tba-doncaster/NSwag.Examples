@@ -1,0 +1,6 @@
+﻿namespace NSwagAspNetCoreWithExamples.Models.Zoo;
+
+public class Sloth : Animal
+{
+    public uint YawnsCount { get; set; }
+}
