@@ -1,0 +1,25 @@
+<Project>
+  <PropertyGroup>
+    <!-- Versioning -->
+    <Version>2.2.0-prerelease</Version>
+
+    <!-- Common package metadata -->
+    <Authors>Vaclav Novotny; TBA Doncaster Limited</Authors>
+    <RepositoryUrl>https://github.com/tba-doncaster/NSwag.Examples</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/tba-doncaster/NSwag.Examples</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <!-- Build settings -->
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+
+    <!-- Package output -->
+    <PackageOutputPath>$(MSBuildThisFileDirectory)..\local-packages</PackageOutputPath>
+  </PropertyGroup>
+
+  <!-- Include README.md from each project directory -->
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" Condition="Exists('README.md')" />
+  </ItemGroup>
+</Project>

@@ -1,19 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
-    <Version>2.1.0</Version>
-    <Authors>Vaclav Novotny; TBA Doncaster Limited</Authors>
-    <RepositoryUrl>https://github.com/tba-doncaster/NSwag.Examples</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/tba-doncaster/NSwag.Examples</PackageProjectUrl>
-    <PackageTabs>NSwag;Examples;Swagger;OpenAPI</PackageTabs>
+    <!-- Package-specific metadata -->
     <PackageId>TBA.NSwag.Examples</PackageId>
     <PackageDescription>Define strongly-typed examples for your NSwag based API. This is a metapackage that references NSwag.Examples.AspNetCore for backwards compatibility. For new projects, consider using TBA.NSwag.Examples.Core or TBA.NSwag.Examples.AspNetCore directly.</PackageDescription>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTabs>NSwag;Examples;Swagger;OpenAPI</PackageTabs>
     <IsPackable>true</IsPackable>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
     <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
 
