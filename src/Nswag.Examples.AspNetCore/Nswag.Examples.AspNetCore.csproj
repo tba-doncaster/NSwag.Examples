@@ -9,6 +9,7 @@
 	<PackageTabs>NSwag;Examples;Swagger;OpenAPI;AspNetCore;</PackageTabs>
 	<PackageId>TBA.NSwag.Examples.AspNetCore</PackageId>
 	<PackageDescription>Define strongly-typed examples for your NSwag based AspNetCore API.</PackageDescription>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<IsPackable>true</IsPackable>
 	<LangVersion>latest</LangVersion>

@@ -9,6 +9,7 @@
 		<PackageTabs>NSwag;Examples;Swagger;OpenAPI;</PackageTabs>
 		<PackageId>TBA.NSwag.Examples.Core</PackageId>
 		<PackageDescription>Core package for NSwag.Examples - Define strongly-typed examples for your NSwag based API.</PackageDescription>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
         <IsPackable>true</IsPackable>
         <LangVersion>latest</LangVersion>
