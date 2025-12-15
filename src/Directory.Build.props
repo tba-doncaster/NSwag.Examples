@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <!-- Versioning -->
-    <Version>2.2.0-prerelease</Version>
+    <Version>2.2.0</Version>
 
     <!-- Common package metadata -->
     <Authors>Vaclav Novotny; TBA Doncaster Limited</Authors>
