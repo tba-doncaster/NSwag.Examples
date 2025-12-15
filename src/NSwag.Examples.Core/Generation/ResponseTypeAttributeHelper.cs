@@ -6,8 +6,11 @@ using System.Reflection;
 namespace NSwag.Examples.Core.Generation;
 
 /// <summary>
-/// Helper to work with response type attributes from different frameworks
-/// (ProducesResponseTypeAttribute from ASP.NET Core or ResponseTypeAttribute from Web API)
+/// Reads response type metadata from attributes using reflection to avoid compile-time dependencies.
+/// Supports:
+/// - ProducesResponseTypeAttribute (ASP.NET Core) - StatusCode: int, Type: Type
+/// - ResponseTypeAttribute (Web API) - StatusCode: int, Type: Type
+/// - SwaggerResponseAttribute (NSwag.Annotations) - StatusCode: string, Type: Type
 /// </summary>
 internal static class ResponseTypeAttributeHelper
 {
@@ -17,25 +20,49 @@ internal static class ResponseTypeAttributeHelper
 
         foreach (var attribute in memberInfo.GetCustomAttributes(true))
         {
-            var attrType = attribute.GetType();
-
-            // Check for StatusCode property (both ProducesResponseTypeAttribute and ResponseTypeAttribute have this)
-            var statusCodeProp = attrType.GetProperty("StatusCode");
-            if (statusCodeProp == null || statusCodeProp.PropertyType != typeof(int))
-                continue;
-
-            var statusCode = (int)statusCodeProp.GetValue(attribute);
-            if (statusCode != responseStatusCode)
-                continue;
-
-            // Get the Type property (both attributes have this)
-            var typeProp = attrType.GetProperty("Type");
-            var type = typeProp?.GetValue(attribute) as Type;
-
-            result.Add(new ResponseTypeInfo(statusCode, type));
+            var responseType = TryExtractResponseTypeInfo(attribute, responseStatusCode);
+            if (responseType != null)
+            {
+                result.Add(responseType);
+            }
         }
 
         return result;
+    }
+
+    private static IResponseTypeInfo? TryExtractResponseTypeInfo(object attribute, int targetStatusCode)
+    {
+        var attrType = attribute.GetType();
+        var statusCodeProp = attrType.GetProperty("StatusCode");
+
+        if (statusCodeProp == null)
+            return null;
+
+        // Handle both int and string StatusCode properties
+        int statusCode;
+        if (statusCodeProp.PropertyType == typeof(int))
+        {
+            statusCode = (int)statusCodeProp.GetValue(attribute);
+        }
+        else if (statusCodeProp.PropertyType == typeof(string))
+        {
+            var statusCodeString = (string)statusCodeProp.GetValue(attribute);
+            if (!int.TryParse(statusCodeString, out statusCode))
+                return null;
+        }
+        else
+        {
+            return null;
+        }
+
+        if (statusCode != targetStatusCode)
+            return null;
+
+        // Extract the response type
+        var typeProp = attrType.GetProperty("Type");
+        var type = typeProp?.GetValue(attribute) as Type;
+
+        return new ResponseTypeInfo(statusCode, type);
     }
 
     private class ResponseTypeInfo : IResponseTypeInfo
