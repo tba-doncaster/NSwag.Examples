@@ -378,7 +378,5 @@ services.AddOpenApiDocument(
 
 
 # Support
-I personally use this NuGet in my projects, so I will keep this repository up-to-date. Any ideas for extending functionalities are welcome, so create an issue with proposal. 
 
-### Did I save you some hours?<!-- omit from toc -->
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U7U72G1A2)
+If you'd like to support the original author, visit https://github.com/vaclavnovotny/NSwag.Examples
