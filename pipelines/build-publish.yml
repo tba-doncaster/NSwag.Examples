@@ -57,6 +57,6 @@ stages:
             displayName: 'NuGet push'
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg'
+              packagesToPush: '$(Pipeline.Workspace)/.nupkgs/**/*.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: TBA_Doncaster Nuget
