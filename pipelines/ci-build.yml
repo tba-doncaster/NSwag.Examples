@@ -1,10 +1,15 @@
 # CI Build Pipeline
-# Runs on every commit to main to verify build and tests pass
+# Runs on every commit to main and on all PRs to verify build and tests pass
 
 trigger:
   branches:
     include:
     - main
+
+pr:
+  branches:
+    include:
+    - '*'
 
 pool:
   vmImage: 'windows-latest'
