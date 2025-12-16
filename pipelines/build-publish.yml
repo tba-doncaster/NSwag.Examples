@@ -1,44 +1,62 @@
-# ASP.NET
-# Build and test ASP.NET projects.
-# Add steps that publish symbols, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
-pool:
-  vmImage: 'windows-latest'
+# Build and Publish Pipeline
+# Triggers when a github release is published - this is "detected" by a tag starting with 'v' being pushed on main branch, part of the github release process
+
+trigger:
+  branches:
+    include:
+    - main
+  tags:
+    include:
+    - v*
+
+pr: none
 
 variables:
   solution: 'src/NSwag.Examples.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  packageOutputPath: '.nupkgs'  # Must match PackageOutputPath in src/Directory.Build.props
 
-steps:
-- task: NuGetToolInstaller@1
+stages:
+- stage: Build
+  displayName: 'Build and Test'
+  jobs:
+  - job: BuildJob
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - template: templates/build-steps.yml
+      parameters:
+        solution: '$(solution)'
+        buildPlatform: '$(buildPlatform)'
+        buildConfiguration: '$(buildConfiguration)'
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
+    - publish: '$(Build.SourcesDirectory)/$(packageOutputPath)'
+      artifact: packages
+      displayName: 'Publish NuGet packages as artifact'
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+- stage: Publish
+  displayName: 'Publish to NuGet'
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: PublishJob
+    displayName: 'Publish NuGet packages'
+    pool:
+      vmImage: 'windows-latest'
+    environment: 'nuget-production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: packages
+            displayName: 'Download NuGet packages'
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet pack'
-  inputs:
-    command: pack 
-    packagesToPack: 'src/**/*.csproj'
-    configuration: 'Release'
-    
-- task: NuGetCommand@2
-  displayName: 'NuGet push'
-  inputs:
-    command: push
-    nuGetFeedType: external
-    publishFeedCredentials: TBA_Doncaster Nuget
+          - task: NuGetCommand@2
+            displayName: 'NuGet push'
+            inputs:
+              command: push
+              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg'
+              nuGetFeedType: external
+              publishFeedCredentials: TBA_Doncaster Nuget

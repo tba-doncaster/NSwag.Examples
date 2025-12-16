@@ -1,0 +1,27 @@
+# CI Build Pipeline
+# Runs on every commit to main and on all PRs to verify build and tests pass
+
+trigger:
+  branches:
+    include:
+    - main
+
+pr:
+  branches:
+    include:
+    - '*'
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: 'src/NSwag.Examples.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- template: templates/build-steps.yml
+  parameters:
+    solution: '$(solution)'
+    buildPlatform: '$(buildPlatform)'
+    buildConfiguration: '$(buildConfiguration)'

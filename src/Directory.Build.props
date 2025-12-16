@@ -15,7 +15,7 @@
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
 
     <!-- Package output -->
-    <PackageOutputPath>$(MSBuildThisFileDirectory)..\local-packages</PackageOutputPath>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)../.nupkgs</PackageOutputPath>
   </PropertyGroup>
 
   <!-- Include README.md from each project directory -->

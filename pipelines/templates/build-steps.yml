@@ -1,0 +1,42 @@
+# Shared build and test steps template
+# Used by both CI and publish pipelines
+
+parameters:
+- name: solution
+  type: string
+  default: 'src/NSwag.Examples.sln'
+- name: buildPlatform
+  type: string
+  default: 'Any CPU'
+- name: buildConfiguration
+  type: string
+  default: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: '${{ parameters.solution }}'
+
+- task: VSBuild@1
+  displayName: 'Build solution'
+  inputs:
+    solution: '${{ parameters.solution }}'
+    msbuildArgs: '/p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+    platform: '${{ parameters.buildPlatform }}'
+    configuration: '${{ parameters.buildConfiguration }}'
+
+- task: VSTest@2
+  displayName: 'Run tests'
+  inputs:
+    platform: '${{ parameters.buildPlatform }}'
+    configuration: '${{ parameters.buildConfiguration }}'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet pack'
+  inputs:
+    command: pack
+    packagesToPack: 'src/**/*.csproj'
+    configuration: '${{ parameters.buildConfiguration }}'
