@@ -5,6 +5,7 @@
     <PackageId>TBA.NSwag.Examples.AspNetCore</PackageId>
     <PackageDescription>Define strongly-typed examples for your NSwag based AspNetCore API.</PackageDescription>
     <PackageTabs>NSwag;Examples;Swagger;OpenAPI;AspNetCore;</PackageTabs>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
