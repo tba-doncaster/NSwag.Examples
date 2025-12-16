@@ -18,6 +18,7 @@ variables:
   solution: 'src/NSwag.Examples.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  packageOutputPath: '.nupkgs'
 
 steps:
 - template: templates/build-steps.yml
@@ -25,3 +26,4 @@ steps:
     solution: '$(solution)'
     buildPlatform: '$(buildPlatform)'
     buildConfiguration: '$(buildConfiguration)'
+    packageOutputPath: '$(packageOutputPath)'

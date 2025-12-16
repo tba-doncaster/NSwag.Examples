@@ -11,6 +11,9 @@ parameters:
 - name: buildConfiguration
   type: string
   default: 'Release'
+- name: packageOutputPath
+  type: string
+  default: '.nupkgs'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -40,3 +43,5 @@ steps:
     command: pack
     packagesToPack: 'src/**/*.csproj'
     configuration: '${{ parameters.buildConfiguration }}'
+    nobuild: true
+    outputDir: '$(Build.SourcesDirectory)/${{ parameters.packageOutputPath }}'
