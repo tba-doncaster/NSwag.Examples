@@ -3,11 +3,11 @@
 
 trigger:
   branches:
-    include:
-    - main
+    exclude:
+    - '*'  # Don't trigger on any branch commits
   tags:
     include:
-    - v*
+    - v*  # Only trigger on version tags
 
 pr: none
 
