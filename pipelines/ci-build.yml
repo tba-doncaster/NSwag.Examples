@@ -1,7 +1,10 @@
-# Build and Publish Pipeline
-# Use for publishing releases to NuGet
+# CI Build Pipeline
+# Runs on every commit to main to verify build and tests pass
 
-trigger: none
+trigger:
+  branches:
+    include:
+    - main
 
 pool:
   vmImage: 'windows-latest'
@@ -17,11 +20,3 @@ steps:
     solution: '$(solution)'
     buildPlatform: '$(buildPlatform)'
     buildConfiguration: '$(buildConfiguration)'
-
-# Publish to NuGet feed
-- task: NuGetCommand@2
-  displayName: 'NuGet push'
-  inputs:
-    command: push
-    nuGetFeedType: external
-    publishFeedCredentials: TBA_Doncaster Nuget
